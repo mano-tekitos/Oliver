@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oliver</title>
+</head>
+<body>
+
+<h1>Oliver</h1>
+ <input type="text" id="userInput" placeholder="Ex: Como usar o comando IF?">
+ <button onclick="oliverResponder()">Perguntar</button>
+<div id="output">Digite uma pergunta para começar.</div>
+<script>
+const respostasBAT = {
+    "como criar um arquivo bat": `Para criar um arquivo BAT:
+1. Abra o Bloco de Notas.
+2. Escreva comandos como:
+    @echo off
+    echo Olá, Mundo!
+    pause
+3. Salve como arquivo.bat.`,
+
+    "exemplo de arquivo bat": `Exemplo básico:
+@echo off
+echo Este é um exemplo.
+pause`,
+
+    "para que serve o comando echo": `O comando ECHO exibe mensagens na tela ou ativa/desativa a exibição de comandos. Exemplo:
+ECHO Olá, Mundo!`,
+
+    "como usar o comando if": `O comando IF executa ações baseadas em condições. Exemplo:
+IF EXIST arquivo.txt (
+    ECHO O arquivo existe.
+) ELSE (
+    ECHO O arquivo não existe.
+)`,
+
+    "como criar um menu em bat": `Um menu em BAT pode ser criado assim:
+@echo off
+:menu
+echo Escolha uma opção:
+echo 1. Opção 1
+echo 2. Opção 2
+set /p escolha="Digite sua opção: "
+if "%escolha%"=="1" goto opcao1
+if "%escolha%"=="2" goto opcao2
+:opcao1
+echo Você escolheu a opção 1.
+pause
+goto menu
+:opcao2
+echo Você escolheu a opção 2.
+pause
+goto menu`,
+
+     "como criar um bat que execute como admin": `isso pode ser:
+     @echo off
+     :: Verifica se está sendo executado como administrador
+     net session >nul 2>&1
+     if %errorlevel% neq 0 (
+         echo Este script precisa ser executado como administrador.
+         pause
+         :: Reexecuta como administrador
+         powershell -Command "Start-Process '%~f0' -Verb RunAs"
+         exit
+     )
+
+     :: Seu script continua aqui
+     echo Executando com privilégios de administrador!
+     pause`,
+};
+
+function oliverResponder() {
+    const input = document.getElementById("userInput").value.toLowerCase();
+    const output = document.getElementById("output");
+
+    if (respostasBAT[input]) {
+        output.textContent = respostasBAT[input];
+    } else {
+        output.textContent = "Desculpe, ainda não sei responder essa pergunta. Tente algo diferente!";
+    }
+}
+
+</script>
+</body>
+</html>
